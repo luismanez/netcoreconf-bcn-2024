@@ -44,28 +44,37 @@ public class PlannerHostedService : IHostedService
         _kernel.ImportPluginFromObject(new MyIpAddressPlugin(_httpClientFactory.CreateClient()));
         _kernel.ImportPluginFromObject(new UniversityFinderPlugin(_httpClientFactory.CreateClient()));
 
-        Console.WriteLine("How can I help:");
-        var ask = Console.ReadLine();
-
-        var planner = new HandlebarsPlanner(new HandlebarsPlannerOptions() { AllowLoops = true });
-
-        try
+        var jsonSerializerOptions = new JsonSerializerOptions { WriteIndented = true };
+        var exit = false;
+        while (!exit)
         {
-            var plan = await planner.CreatePlanAsync(_kernel, ask!);
-            _logger.LogInformation("Plan:\n");
-            _logger.LogInformation(
-                JsonSerializer.Serialize(plan, new JsonSerializerOptions { WriteIndented = true }));
+            Console.WriteLine("How can I help:");
+            var ask = Console.ReadLine();
 
-            var result = await plan.InvokeAsync(_kernel, cancellationToken: cancellationToken);
-            _logger.LogInformation("Plan results:\n");
-            _logger.LogInformation(result);
-        }
-        catch (KernelException e)
-        {
-            // Create plan error: Not possible to create plan for goal with available functions.
-            // Goal: ...
-            // Functions: ...
-            Console.WriteLine(e.Message);
+            var planner = new HandlebarsPlanner(new HandlebarsPlannerOptions() { AllowLoops = true });
+
+            try
+            {
+                var plan = await planner.CreatePlanAsync(_kernel, ask!);
+                Console.WriteLine("Plan:\n");
+                Console.WriteLine(
+                    JsonSerializer.Serialize(plan, jsonSerializerOptions));
+
+                var result = await plan.InvokeAsync(_kernel, cancellationToken: cancellationToken);
+                Console.WriteLine("Plan results:\n");
+                Console.WriteLine(result);
+            }
+            catch (KernelException e)
+            {
+                // Create plan error: Not possible to create plan for goal with available functions.
+                // Goal: ...
+                // Functions: ...
+                Console.WriteLine(e.Message);
+            }
+
+            Console.WriteLine("\n\nDo you want to continue? (Y/N)");
+            var response = Console.ReadLine();
+            exit = response?.ToUpper() != "Y";
         }
     }
 

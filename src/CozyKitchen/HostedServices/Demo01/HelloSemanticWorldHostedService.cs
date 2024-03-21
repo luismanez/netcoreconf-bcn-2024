@@ -1,4 +1,3 @@
-using System.Text.Json;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.SemanticKernel;
@@ -34,7 +33,7 @@ public class HelloSemanticWorldHostedService : IHostedService
             new OpenAIPromptExecutionSettings()
             {
                 MaxTokens = 100, Temperature = 0.4, TopP = 1
-            });
+            }, "JokeFunction");
 
         // return as FunctionResult
         var result = await _kernel.InvokeAsync(jokeFunction, new() { ["input"] = "Chuck Norris movies" });
@@ -43,7 +42,7 @@ public class HelloSemanticWorldHostedService : IHostedService
         // var resultString = await _kernel.InvokeAsync<string>(jokeFunction, new() { ["input"] = "Chuck Norris movies" });
         // _logger.LogInformation($"Joke: {resultString}");
 
-        _logger.LogInformation($"Joke: {result.GetValue<string>()}");
+        _logger.LogInformation($"\n\nJoke: {result.GetValue<string>()}\n\n");
         _logger.LogInformation(result.Metadata?["Usage"]?.AsJson());
     }
 
