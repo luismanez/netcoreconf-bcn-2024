@@ -1,0 +1,39 @@
+{
+    "schema": 1,
+    "description": "Creates an About Me paragraph that can be used in a Resume or Presentation.",
+    "execution_settings": {
+      "default": {
+        "max_tokens": 1000,
+        "temperature": 0.9,
+        "top_p": 0.0,
+        "presence_penalty": 0.0,
+        "frequency_penalty": 0.0
+      }
+    },
+    "input_variables": [
+      {
+        "name": "FullName",
+        "description": "User Full Name",
+        "is_required": true,
+        "default": ""
+      },
+      {
+        "name": "JobTitle",
+        "description": "Your current Job title or the one that you want to use to generate the About me paragraph (i.e: Software Engineer, Lawyer)",
+        "is_required": true,
+        "default": ""
+      },
+      {
+        "name": "TotalYearsOfExperience",
+        "description": "Number of years of experience",
+        "is_required": true,
+        "default": ""
+      },
+      {
+        "name": "MainArea",
+        "description": "Main area or area of expertise of your Job Title.",
+        "is_required": true,
+        "default": ""
+      }
+    ]
+}

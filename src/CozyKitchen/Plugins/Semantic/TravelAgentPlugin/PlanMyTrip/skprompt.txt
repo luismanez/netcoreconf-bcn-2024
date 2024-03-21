@@ -1,0 +1,3 @@
+Give me a plan for visiting: {{$City}}. I will be there for: {{$NumberOfDays}} days.
+I am more interested in food and less in places or monuments. I just need 2-3 activities per day.
+Format output as markdown format, with headings for DAY 1, DAY 2, etc, and then the list of activities as bullet point list.

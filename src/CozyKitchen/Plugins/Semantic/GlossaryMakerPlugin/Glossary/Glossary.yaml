@@ -1,0 +1,18 @@
+name: GenerateGlossary
+template: |
+  Generate a glossary about {{$topic}} with the most relevant words about that topic,
+  with a maximum of {{$length}} words.
+template_format: semantic-kernel
+description: A function that generates a glossary about a topic.
+input_variables:
+  - name: topic
+    description: The topic of the glossary.
+    is_required: true
+  - name: length
+    description: The number of words in the glossary.
+    is_required: true
+output_variable:
+  description: The generated glossary.
+execution_settings:
+  default:
+    temperature: 0.6

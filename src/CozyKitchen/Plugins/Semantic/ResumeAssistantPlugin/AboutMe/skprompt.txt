@@ -1,0 +1,5 @@
+My name is {{$FullName}}, I'm a {{$JobTitle}} with {{$TotalYearsOfExperience}} years of experience in {{$MainArea}}.
+Write me an About me paragraph with the most relevant 7 skills, technologies, tools, platforms (depending on {{$MainArea}})
+I've worked in the most 3 main companies in the {{$MainArea}}. List them here adding an achievement.
+Add some usual soft skills, including some common speaking languages.
+End it with some personal hobbies (be creative here).

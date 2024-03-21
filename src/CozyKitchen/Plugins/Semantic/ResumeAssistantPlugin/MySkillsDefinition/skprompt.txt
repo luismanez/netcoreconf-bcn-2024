@@ -1,0 +1,5 @@
+Given the following list of Professional skills:
+[Skills]
+{{GraphSkillsPlugin.GetMySkills}}
+[Skills]
+Now give me the same list, but add a brief description/definition of each skill.
